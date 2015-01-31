@@ -10,7 +10,7 @@ namespace GP3_Project
     class Camera2D
     {
         public Matrix Transform;
-        Viewport View;
+        public Viewport View;
         Vector2 Center;
 
         public Camera2D(Viewport view)

@@ -48,7 +48,7 @@ namespace GP3_Project
             Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun04.txt")));
             Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun05.txt")));
             player = new Player(new Rectangle(0, 0, Tile.TileSize, Tile.TileSize), graphics);
-            LevelLoader.LoadLevel(graphics, Content, Level.Levels[0].levelTextFile, player);
+            LevelLoader.LoadLevel(graphics, Content, Level.Levels[0], player);
         }
 
         protected override void UnloadContent()
@@ -71,6 +71,7 @@ namespace GP3_Project
             foreach(Enemy enemy in Enemy.Enemies)
             {
                 enemy.EnemyKnockback(player, gameTime);
+                enemy.EnemyMovement(gameTime);
             }
 
             Enemy.RemoveDeadEnemies();

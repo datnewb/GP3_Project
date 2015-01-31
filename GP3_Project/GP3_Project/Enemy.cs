@@ -16,7 +16,15 @@ namespace GP3_Project
         public int currentHealth;
         public bool damaged;
 
+        public int movementSpeed;
+        public Direction movementDirection;
         public int knockbackSpeed;
+
+        private float movementTime;
+        private float currentMovementTime;
+
+        private float idleTime;
+        private float currentIdleTime;
 
         public Enemy(GraphicsDevice graphicsDevice, Rectangle Rect)
         {
@@ -30,7 +38,16 @@ namespace GP3_Project
             currentHealth = Health;
             damaged = false;
 
+            movementSpeed = 2;
+            Random randomizer = new Random();
+            movementDirection = (Direction)(randomizer.Next(0, 4));
             knockbackSpeed = 5;
+
+            movementTime = 0.1f;
+            currentMovementTime = movementTime;
+
+            idleTime = 3;
+            currentIdleTime = idleTime;
         }
 
         public void Damage()
@@ -62,16 +79,16 @@ namespace GP3_Project
 
                 switch (player.lastDirection)
                 {
-                    case LastDirection.Left:
+                    case Direction.Left:
                         KnockbackSpeedX = -((int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
                         break;
-                    case LastDirection.Right:
+                    case Direction.Right:
                         KnockbackSpeedX = (int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
                         break;
-                    case LastDirection.Up:
+                    case Direction.Up:
                         KnockbackSpeedY = -((int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
                         break;
-                    case LastDirection.Down:
+                    case Direction.Down:
                         KnockbackSpeedY = (int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
                         break;
                 }
@@ -80,6 +97,56 @@ namespace GP3_Project
 
                 Rect.X += KnockbackSpeedX;
                 Rect.Y += KnockbackSpeedY;
+            }
+        }
+
+        public void EnemyMovement(GameTime gameTime)
+        {
+            if (currentIdleTime == idleTime)
+            {
+                int currentSpeedX = 0;
+                int currentSpeedY = 0;
+
+                currentMovementTime -= gameTime.ElapsedGameTime.Milliseconds / 1000f;
+                if (currentMovementTime <= 0)
+                {
+                    currentMovementTime = movementTime;
+                    currentIdleTime = 0;
+                }
+
+                switch (movementDirection)
+                {
+                    case Direction.Left:
+                        currentSpeedX = -((int)(float)(movementSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
+                        goto default;
+                    case Direction.Right:
+                        currentSpeedX = (int)(float)(movementSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
+                        goto default;
+                    case Direction.Up:
+                        currentSpeedY = -((int)(float)(movementSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
+                        goto default;
+                    case Direction.Down:
+                        currentSpeedY = (int)(float)(movementSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
+                        goto default;
+                    default:
+                        break;
+                }
+
+                Physics.WallDetection(ref Rect, ref currentSpeedX, ref currentSpeedY);
+
+                Rect.X += currentSpeedX;
+                Rect.Y += currentSpeedY;
+            }
+            else
+            {
+                currentIdleTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+                if (currentIdleTime >= idleTime)
+                {
+                    currentIdleTime = idleTime;
+                    Random randomizer = new Random();
+                    movementDirection = (Direction)(randomizer.Next(0, 4));
+                    currentMovementTime = movementTime;
+                }
             }
         }
     }

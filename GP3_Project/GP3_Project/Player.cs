@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GP3_Project
 {
-    enum LastDirection
+    enum Direction
     {
         Up,
         Down,
@@ -20,7 +20,7 @@ namespace GP3_Project
     {
         public Rectangle Rect;
         public Rectangle AttackRect;
-        public LastDirection lastDirection;
+        public Direction lastDirection;
         public static int Speed = 3;
         private int currentSpeedX;
         private int currentSpeedY;
@@ -43,7 +43,7 @@ namespace GP3_Project
             textureColor[0] = Color.DarkGreen;
             playerTexture.SetData(textureColor);
 
-            lastDirection = LastDirection.Down;
+            lastDirection = Direction.Down;
             AttackRect = new Rectangle(Rect.Center.X - Tile.TileSize / 8, Rect.Bottom, Tile.TileSize / 4, Tile.TileSize);
 
             AllowMove = true;
@@ -60,25 +60,25 @@ namespace GP3_Project
                 if (currentKeyState.IsKeyDown(Keys.Left))
                 {
                     currentSpeedX = -((int)(float)(Speed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
-                    lastDirection = LastDirection.Left;
+                    lastDirection = Direction.Left;
                     currentSpeedY = 0;
                 }
                 else if (currentKeyState.IsKeyDown(Keys.Right))
                 {
                     currentSpeedX = (int)(float)(Speed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
-                    lastDirection = LastDirection.Right;
+                    lastDirection = Direction.Right;
                     currentSpeedY = 0;
                 }
                 else if (currentKeyState.IsKeyDown(Keys.Up))
                 {
                     currentSpeedY = -((int)(float)(Speed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
-                    lastDirection = LastDirection.Up;
+                    lastDirection = Direction.Up;
                     currentSpeedX = 0;
                 }
                 else if (currentKeyState.IsKeyDown(Keys.Down))
                 {
                     currentSpeedY = (int)(float)(Speed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
-                    lastDirection = LastDirection.Down;
+                    lastDirection = Direction.Down;
                     currentSpeedX = 0;
                 }
                 else
@@ -118,16 +118,16 @@ namespace GP3_Project
         {
             switch (lastDirection)
             {
-                case LastDirection.Left:
+                case Direction.Left:
                     AttackRect = new Rectangle(Rect.Left - Tile.TileSize, Rect.Center.Y - Tile.TileSize / 4, Tile.TileSize, Tile.TileSize / 2);
                     break;
-                case LastDirection.Right:
+                case Direction.Right:
                     AttackRect = new Rectangle(Rect.Right, Rect.Center.Y - Tile.TileSize / 4, Tile.TileSize, Tile.TileSize / 2);
                     break;
-                case LastDirection.Up:
+                case Direction.Up:
                     AttackRect = new Rectangle(Rect.Center.X - Tile.TileSize / 4, Rect.Top - Tile.TileSize, Tile.TileSize / 2, Tile.TileSize);
                     break;
-                case LastDirection.Down:
+                case Direction.Down:
                     AttackRect = new Rectangle(Rect.Center.X - Tile.TileSize / 4, Rect.Bottom, Tile.TileSize / 2, Tile.TileSize);
                     break;
             }

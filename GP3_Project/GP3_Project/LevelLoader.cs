@@ -9,12 +9,13 @@ namespace GP3_Project
 {
     class LevelLoader
     {
+        public static Level LoadedLevel = new Level();
         public static bool ScrollingLevelX = false;
         public static bool ScrollingLevelY = false;
         public static int LevelCenterX = 0;
         public static int LevelCenterY = 0;
 
-        public static void LoadLevel(GraphicsDeviceManager graphics, ContentManager Content, string[] levelString, Player player)
+        public static void LoadLevel(GraphicsDeviceManager graphics, ContentManager Content, Level level, Player player)
         {
             Tile.LevelTiles.Clear();
 
@@ -23,7 +24,7 @@ namespace GP3_Project
             int longestLevelWidth = 0;
             int levelHeight = 0;
 
-            foreach (string line in levelString)
+            foreach (string line in level.levelTextFile)
             {
                 levelWidth = 0;
                 foreach (char tile in line)
@@ -63,7 +64,7 @@ namespace GP3_Project
             //Create tiles
             int tileXCoord = 0;
             int tileYCoord = 0;
-            foreach (string line in levelString)
+            foreach (string line in level.levelTextFile)
             {
                 tileXCoord = 0;
                 foreach (char tile in line)
@@ -97,6 +98,8 @@ namespace GP3_Project
                 }
                 tileYCoord += Tile.TileSize;
             }
+
+            LoadedLevel = level;
         }
     }
 }

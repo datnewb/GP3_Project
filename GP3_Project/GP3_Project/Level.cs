@@ -20,5 +20,12 @@ namespace GP3_Project
             NextLevelStart = new List<Rectangle>();
             this.levelTextFile = levelTextFile;
         }
+
+        public Level()
+        {
+            NextLevels = new List<Level>();
+            NextLevelStart = new List<Rectangle>();
+            levelTextFile = new string[0];
+        }
     }
 }
