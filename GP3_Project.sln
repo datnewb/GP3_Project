@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GP3_Project", "GP3_Project\GP3_Project\GP3_Project.csproj", "{D27D6069-C908-40BB-92F1-4A2289FD8E90}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GP3_ProjectContent", "GP3_Project\GP3_ProjectContent\GP3_ProjectContent.contentproj", "{100BA5AD-DC01-4E5E-949D-F0A6292F8C3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D27D6069-C908-40BB-92F1-4A2289FD8E90}.Debug|x86.ActiveCfg = Debug|x86
+		{D27D6069-C908-40BB-92F1-4A2289FD8E90}.Debug|x86.Build.0 = Debug|x86
+		{D27D6069-C908-40BB-92F1-4A2289FD8E90}.Release|x86.ActiveCfg = Release|x86
+		{D27D6069-C908-40BB-92F1-4A2289FD8E90}.Release|x86.Build.0 = Release|x86
+		{100BA5AD-DC01-4E5E-949D-F0A6292F8C3B}.Debug|x86.ActiveCfg = Debug|x86
+		{100BA5AD-DC01-4E5E-949D-F0A6292F8C3B}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
