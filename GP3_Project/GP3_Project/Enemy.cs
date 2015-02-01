@@ -26,6 +26,8 @@ namespace GP3_Project
         private float idleTime;
         private float currentIdleTime;
 
+        private Random randomizer;
+
         public Enemy(GraphicsDevice graphicsDevice, Rectangle Rect)
         {
             this.Rect = Rect;
@@ -39,7 +41,7 @@ namespace GP3_Project
             damaged = false;
 
             movementSpeed = 2;
-            Random randomizer = new Random();
+            randomizer = new Random(this.GetHashCode());
             movementDirection = (Direction)(randomizer.Next(0, 4));
             knockbackSpeed = 5;
 
@@ -143,7 +145,6 @@ namespace GP3_Project
                 if (currentIdleTime >= idleTime)
                 {
                     currentIdleTime = idleTime;
-                    Random randomizer = new Random();
                     movementDirection = (Direction)(randomizer.Next(0, 4));
                     currentMovementTime = movementTime;
                 }

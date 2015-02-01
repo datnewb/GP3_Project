@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace GP3_Project
 {
-    class Physics
+    static class Physics
     {
         public static void WallDetection(ref Rectangle Rect, ref int currentSpeedX, ref int currentSpeedY)
         {

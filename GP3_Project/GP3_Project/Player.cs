@@ -32,6 +32,9 @@ namespace GP3_Project
         private float AttackTime;
         private float currentAttackTime;
 
+        public int health;
+        public int currentHealth;
+
         public Player(Rectangle startPosition, GraphicsDeviceManager graphics)
         {
             Rect = startPosition;
@@ -51,6 +54,9 @@ namespace GP3_Project
 
             AttackTime = 0.2f;
             currentAttackTime = 0;
+
+            health = 3;
+            currentHealth = health;
         }
 
         public void InputListener(KeyboardState currentKeyState, KeyboardState previousKeyState, GameTime gameTime)

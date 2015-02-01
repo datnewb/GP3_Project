@@ -16,7 +16,6 @@ namespace GP3_Project
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Level CurrentLevel;
         Player player;
 
         //Camera stuff
@@ -42,11 +41,16 @@ namespace GP3_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01.txt")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02.txt")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun03.txt")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun04.txt")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun05.txt")));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_Start.txt"), Content.Load<Texture2D>(@"Textures\dun01_WholeImage")));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02_From01.txt"), Content.Load<Texture2D>(@"Textures\dun02_WholeImage")));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_From02.txt"), Content.Load<Texture2D>(@"Textures\dun01_WholeImage")));
+
+            Level.Levels[0].NextLevels.Add(Level.Levels[1]);
+
+            Level.Levels[1].NextLevels.Add(Level.Levels[2]);
+
+            Level.Levels[2].NextLevels.Add(Level.Levels[1]);
+
             player = new Player(new Rectangle(0, 0, Tile.TileSize, Tile.TileSize), graphics);
             LevelLoader.LoadLevel(graphics, Content, Level.Levels[0], player);
         }
@@ -74,6 +78,17 @@ namespace GP3_Project
                 enemy.EnemyMovement(gameTime);
             }
 
+            foreach (Tile tile in Tile.LevelTiles)
+            {
+                if (tile.GetType() == typeof(NextLevelTile))
+                {
+                    bool shouldBreak = false;
+                    ((NextLevelTile)tile).CheckExit(player, ref shouldBreak);
+                    if (shouldBreak)
+                        break;
+                }
+            }
+
             Enemy.RemoveDeadEnemies();
 
             previousKeyState = currentKeyState;
@@ -86,10 +101,8 @@ namespace GP3_Project
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
-            foreach (Tile tile in Tile.LevelTiles)
-            {
-                spriteBatch.Draw(tile.tileTexture, tile.Rect, Color.White);
-            }
+
+            spriteBatch.Draw(LevelLoader.LoadedLevelTexture, LevelLoader.LoadedLevelTexture.Bounds, Color.White);
 
             foreach (Enemy enemy in Enemy.Enemies)
             {

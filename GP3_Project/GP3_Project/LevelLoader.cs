@@ -7,17 +7,21 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GP3_Project
 {
-    class LevelLoader
+    static class LevelLoader
     {
         public static Level LoadedLevel = new Level();
+        public static Texture2D LoadedLevelTexture;
         public static bool ScrollingLevelX = false;
         public static bool ScrollingLevelY = false;
         public static int LevelCenterX = 0;
         public static int LevelCenterY = 0;
+        public static int LevelWidth = 0;
+        public static int LevelHeight = 0;
 
         public static void LoadLevel(GraphicsDeviceManager graphics, ContentManager Content, Level level, Player player)
         {
-            Tile.LevelTiles.Clear();
+            Tile.LevelTiles = new List<Tile>();
+            Enemy.Enemies = new List<Enemy>();
 
             //Check size of level
             int levelWidth = 0;
@@ -37,6 +41,9 @@ namespace GP3_Project
                 levelHeight += Tile.TileSize;
             }
             LevelCenterY = levelHeight / 2;
+
+            LevelWidth = longestLevelWidth;
+            LevelHeight = levelHeight;
 
             int startX = 0;
             int startY = 0;
@@ -79,20 +86,35 @@ namespace GP3_Project
                             goto case 'O';
                         case 'O': //Empty Tile
                             Tile.LevelTiles.Add(new Tile(
-                                graphics.GraphicsDevice,
-                                new Vector2(tileXCoord, tileYCoord),
-                                Content.Load<Texture2D>(@"Textures\Wall"),
+                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize),
                                 TileType.Empty));
                             break;
-                        case 'X': //Solid Tile
+                        case 'X': //Single Wall Tile
                             Tile.LevelTiles.Add(new Tile(
-                                graphics.GraphicsDevice,
-                                new Vector2(tileXCoord, tileYCoord),
-                                Content.Load<Texture2D>(@"Textures\Floor"),
+                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize),
                                 TileType.Wall));
                             break;
-                        case 'F': //Next Level Tile
+                        case 'x': //1.5 Wall Tile
+                            Tile.LevelTiles.Add(new Tile(
+                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize * 3 / 2),
+                                TileType.Wall));
                             break;
+                        default:
+                            if (char.IsDigit(tile))
+                            {
+                                int nextLevelIndex = int.Parse(char.ToString(tile));
+                                if (nextLevelIndex < level.NextLevels.Count)
+                                {
+                                    Tile.LevelTiles.Add(new NextLevelTile(
+                                        graphics, 
+                                        Content, 
+                                        level.NextLevels[nextLevelIndex], 
+                                        new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize), 
+                                        TileType.Exit));
+                                }
+                            }
+                            break;
+
                     }
                     tileXCoord += Tile.TileSize;
                 }
@@ -100,6 +122,7 @@ namespace GP3_Project
             }
 
             LoadedLevel = level;
+            LoadedLevelTexture = level.levelTexture;
         }
     }
 }

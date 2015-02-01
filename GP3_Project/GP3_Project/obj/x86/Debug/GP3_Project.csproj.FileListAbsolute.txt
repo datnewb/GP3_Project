@@ -8,8 +8,6 @@ c:\users\jblopez\documents\visual studio 2013\Projects\GP3_Project\GP3_Project\G
 c:\users\jblopez\documents\visual studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Floor.xnb
 c:\users\jblopez\documents\visual studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Wall.xnb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Character_SpriteSheet.xnb
-C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Floor.xnb
-C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Wall.xnb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\GP3_Project.exe
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\GP3_Project.pdb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\obj\x86\Debug\GP3_Project.csprojResolveAssemblyReference.cache
@@ -17,8 +15,14 @@ C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\G
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\obj\x86\Debug\GP3_Project.exe
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\obj\x86\Debug\GP3_Project.pdb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\TestLevel.txt
-C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun01.txt
-C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun02.txt
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun03.txt
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun04.txt
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun05.txt
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\dun01_WholeImage.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Character_SpriteSheet.png
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\dun01_WholeImage.png
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\TestNextLevel.txt
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun02_From01.txt
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\dun02_WholeImage.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun01_Start.txt
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun01_From02.txt

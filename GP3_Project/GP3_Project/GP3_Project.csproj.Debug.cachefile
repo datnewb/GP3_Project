@@ -1,9 +1,13 @@
 Content\Textures\Character_SpriteSheet.xnb
-Content\Textures\Floor.xnb
-Content\Textures\Wall.xnb
+Content\Textures\dun01_WholeImage.xnb
+Content\Textures\dun02_WholeImage.xnb
+Content\Textures\Character_SpriteSheet.png
+Content\Textures\dun01_WholeImage.png
 Content\Levels\TestLevel.txt
-Content\Levels\Dun01.txt
-Content\Levels\Dun02.txt
+Content\Levels\Dun02_From01.txt
 Content\Levels\Dun03.txt
 Content\Levels\Dun04.txt
 Content\Levels\Dun05.txt
+Content\Levels\Dun01_Start.txt
+Content\Levels\TestNextLevel.txt
+Content\Levels\Dun01_From02.txt
