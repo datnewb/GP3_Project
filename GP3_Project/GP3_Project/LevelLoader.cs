@@ -10,7 +10,7 @@ namespace GP3_Project
     static class LevelLoader
     {
         public static Level LoadedLevel = new Level();
-        public static Texture2D LoadedLevelTexture;
+        public static Texture2D LoadedLevelTexture = null;
         public static bool ScrollingLevelX = false;
         public static bool ScrollingLevelY = false;
         public static int LevelCenterX = 0;
@@ -20,6 +20,9 @@ namespace GP3_Project
 
         public static void LoadLevel(GraphicsDeviceManager graphics, ContentManager Content, Level level, Player player)
         {
+            if (LoadedLevelTexture != null)
+                LoadedLevelTexture.Dispose();
+
             Tile.LevelTiles = new List<Tile>();
             Enemy.Enemies = new List<Enemy>();
 
@@ -122,7 +125,7 @@ namespace GP3_Project
             }
 
             LoadedLevel = level;
-            LoadedLevelTexture = level.levelTexture;
+            LoadedLevelTexture = Content.Load<Texture2D>(level.levelTextureDirectory);
         }
     }
 }

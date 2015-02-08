@@ -12,16 +12,16 @@ namespace GP3_Project
         public static List<Level> Levels = new List<Level>();
 
         public string[] levelTextFile;
+        public string levelTextureDirectory;
         public List<Level> NextLevels;
         public List<Rectangle> NextLevelStart;
-        public Texture2D levelTexture;
 
-        public Level(string[] levelTextFile, Texture2D levelTexture)
+        public Level(string[] levelTextFile, string levelTextureDirectory)
         {
             NextLevels = new List<Level>();
             NextLevelStart = new List<Rectangle>();
             this.levelTextFile = levelTextFile;
-            this.levelTexture = levelTexture;
+            this.levelTextureDirectory = levelTextureDirectory;
         }
 
         public Level()
@@ -29,7 +29,7 @@ namespace GP3_Project
             NextLevels = new List<Level>();
             NextLevelStart = new List<Rectangle>();
             levelTextFile = new string[0];
-            levelTexture = null;
+            levelTextureDirectory = "";
         }
     }
 }

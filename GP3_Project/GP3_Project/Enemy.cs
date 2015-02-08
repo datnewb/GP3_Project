@@ -48,8 +48,15 @@ namespace GP3_Project
             movementTime = 0.1f;
             currentMovementTime = movementTime;
 
-            idleTime = 3;
+            idleTime = 1;
             currentIdleTime = idleTime;
+        }
+
+        public void EnemyActions(Player player, GameTime gameTime)
+        {
+            EnemyAttack(player, gameTime);
+            EnemyKnockback(player, gameTime);
+            EnemyMovement(gameTime);
         }
 
         public void Damage()
@@ -72,7 +79,7 @@ namespace GP3_Project
             }
         }
 
-        public void EnemyKnockback(Player player, GameTime gameTime)
+        private void EnemyKnockback(Player player, GameTime gameTime)
         {
             if (damaged)
             {
@@ -102,7 +109,7 @@ namespace GP3_Project
             }
         }
 
-        public void EnemyMovement(GameTime gameTime)
+        private void EnemyMovement(GameTime gameTime)
         {
             if (currentIdleTime == idleTime)
             {
@@ -148,6 +155,14 @@ namespace GP3_Project
                     movementDirection = (Direction)(randomizer.Next(0, 4));
                     currentMovementTime = movementTime;
                 }
+            }
+        }
+
+        private void EnemyAttack(Player player, GameTime gameTime)
+        {
+            if (player.Rect.Intersects(Rect))
+            {
+                player.Damage(this, gameTime);
             }
         }
     }

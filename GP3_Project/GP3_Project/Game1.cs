@@ -41,9 +41,9 @@ namespace GP3_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_Start.txt"), Content.Load<Texture2D>(@"Textures\dun01_WholeImage")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02_From01.txt"), Content.Load<Texture2D>(@"Textures\dun02_WholeImage")));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_From02.txt"), Content.Load<Texture2D>(@"Textures\dun01_WholeImage")));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_Start.txt"), @"Textures\dun01_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02_From01.txt"), @"Textures\dun02_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_From02.txt"), @"Textures\dun01_WholeImage"));
 
             Level.Levels[0].NextLevels.Add(Level.Levels[1]);
 
@@ -62,22 +62,28 @@ namespace GP3_Project
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
             KeyboardState currentKeyState = Keyboard.GetState();
 
+            //Player updates
             player.InputListener(currentKeyState, previousKeyState, gameTime);
             player.Actions(gameTime);
 
-            camera.Update(gameTime, player);
-            
-            foreach(Enemy enemy in Enemy.Enemies)
+            if (player.currentHealth <= 0)
             {
-                enemy.EnemyKnockback(player, gameTime);
-                enemy.EnemyMovement(gameTime);
+                LevelLoader.LoadLevel(graphics, Content, LevelLoader.LoadedLevel, player);
             }
 
+            camera.Update(gameTime, player);
+            
+            //Enemy updates
+            foreach(Enemy enemy in Enemy.Enemies)
+            {
+                enemy.EnemyActions(player, gameTime);
+            }
+
+            Enemy.RemoveDeadEnemies();
+
+            //Next level checking
             foreach (Tile tile in Tile.LevelTiles)
             {
                 if (tile.GetType() == typeof(NextLevelTile))
@@ -88,8 +94,6 @@ namespace GP3_Project
                         break;
                 }
             }
-
-            Enemy.RemoveDeadEnemies();
 
             previousKeyState = currentKeyState;
 
@@ -102,7 +106,8 @@ namespace GP3_Project
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
-            spriteBatch.Draw(LevelLoader.LoadedLevelTexture, LevelLoader.LoadedLevelTexture.Bounds, Color.White);
+            if (LevelLoader.LoadedLevelTexture != null)
+                spriteBatch.Draw(LevelLoader.LoadedLevelTexture, LevelLoader.LoadedLevelTexture.Bounds, Color.White);
 
             foreach (Enemy enemy in Enemy.Enemies)
             {

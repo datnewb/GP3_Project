@@ -35,6 +35,14 @@ namespace GP3_Project
         public int health;
         public int currentHealth;
 
+        public Enemy lastEnemyAttacker;
+
+        private bool damaged;
+        private float invulnerableTime;
+        private float currentInvulnerableTime;
+
+        private float knockbackSpeed;
+
         public Player(Rectangle startPosition, GraphicsDeviceManager graphics)
         {
             Rect = startPosition;
@@ -57,6 +65,12 @@ namespace GP3_Project
 
             health = 3;
             currentHealth = health;
+
+            damaged = false;
+            invulnerableTime = 1;
+            currentInvulnerableTime = 0;
+
+            knockbackSpeed = 5;
         }
 
         public void InputListener(KeyboardState currentKeyState, KeyboardState previousKeyState, GameTime gameTime)
@@ -111,16 +125,51 @@ namespace GP3_Project
 
         public void Actions(GameTime gameTime)
         {
-            UpdateAttackRect();
-            Attack(gameTime);
+            if (!damaged)
+            {
+                UpdateAttackRect();
+                Attack(gameTime);
 
-            Physics.WallDetection(ref Rect, ref currentSpeedX, ref currentSpeedY);
+                Physics.WallDetection(ref Rect, ref currentSpeedX, ref currentSpeedY);
 
-            Rect.X += currentSpeedX;
-            Rect.Y += currentSpeedY;
+                Rect.X += currentSpeedX;
+                Rect.Y += currentSpeedY;
+            }
+            else
+            {
+
+            }
         }
 
-        public void UpdateAttackRect()
+        public void Damage(Enemy enemy, GameTime gameTime)
+        {
+            if (!damaged)
+            {
+                lastEnemyAttacker = enemy;
+                IsAttacking = false;
+                currentInvulnerableTime = 0;
+                currentHealth--;
+            }
+            else
+            {
+                currentInvulnerableTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+                if (currentInvulnerableTime >= invulnerableTime)
+                {
+                    damaged = false;
+                }
+            }
+        }
+
+        private void Knockback(GameTime gameTime)
+        {
+            if (lastEnemyAttacker != null)
+            {
+                int knockbackSpeedX = 0;
+                int knockbackSpeedY = 0;
+            }
+        }
+
+        private void UpdateAttackRect()
         {
             switch (lastDirection)
             {
@@ -139,7 +188,7 @@ namespace GP3_Project
             }
         }
 
-        public void Attack(GameTime gameTime)
+        private void Attack(GameTime gameTime)
         {
             if (IsAttacking)
             {
