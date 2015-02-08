@@ -71,6 +71,7 @@ namespace GP3_Project
             if (player.currentHealth <= 0)
             {
                 LevelLoader.LoadLevel(graphics, Content, LevelLoader.LoadedLevel, player);
+                player.Reset();
             }
 
             camera.Update(gameTime, player);

@@ -45,26 +45,37 @@ namespace GP3_Project
             movementDirection = (Direction)(randomizer.Next(0, 4));
             knockbackSpeed = 5;
 
-            movementTime = 0.1f;
+            movementTime = 0.4f;
             currentMovementTime = movementTime;
 
-            idleTime = 1;
-            currentIdleTime = idleTime;
+            idleTime = 1.5f;
+            currentIdleTime = randomizer.Next(0, (int)(Math.Ceiling(idleTime))) + (float)(randomizer.NextDouble());
         }
 
         public void EnemyActions(Player player, GameTime gameTime)
         {
-            EnemyAttack(player, gameTime);
-            EnemyKnockback(player, gameTime);
-            EnemyMovement(gameTime);
+            if (!damaged)
+            {
+                EnemyAttack(player, gameTime);
+                EnemyMovement(gameTime);
+            }
+            else
+            {
+                EnemyKnockback(player, gameTime);
+            }
         }
 
         public void Damage()
         {
             currentHealth--;
-            damaged = true;
             if (currentHealth <= 0)
+            {
                 EnemiesToBeRemoved.Add(this);
+                return;
+            }
+
+            damaged = true;
+            currentIdleTime = 0;
         }
 
         public static void RemoveDeadEnemies()
@@ -142,6 +153,7 @@ namespace GP3_Project
                 }
 
                 Physics.WallDetection(ref Rect, ref currentSpeedX, ref currentSpeedY);
+                Physics.EnemyBlocking(ref Rect, ref currentSpeedX, ref currentSpeedY);
 
                 Rect.X += currentSpeedX;
                 Rect.Y += currentSpeedY;

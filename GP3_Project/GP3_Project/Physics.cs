@@ -66,5 +66,63 @@ namespace GP3_Project
                 }
             }
         }
+
+        public static void EnemyBlocking(ref Rectangle Rect, ref int currentSpeedX, ref int currentSpeedY)
+        {
+            foreach (Enemy enemy in Enemy.Enemies)
+            {
+                if (currentSpeedX != 0)
+                {
+                    if (Rect.Top <= enemy.Rect.Bottom &&
+                        Rect.Bottom >= enemy.Rect.Top)
+                    {
+                        if (currentSpeedX > 0 && Rect.Right <= enemy.Rect.Left)
+                        {
+                            if (Rect.Right + currentSpeedX >= enemy.Rect.Left)
+                            {
+                                Rect.X = enemy.Rect.X - Rect.Width - 1;
+                                currentSpeedX = 0;
+                                break;
+                            }
+                        }
+                        else if (currentSpeedX < 0 && Rect.Left >= enemy.Rect.Right)
+                        {
+                            if (Rect.Left + currentSpeedX <= enemy.Rect.Right)
+                            {
+                                Rect.X = enemy.Rect.Right + 1;
+                                currentSpeedX = 0;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                else if (currentSpeedY != 0)
+                {
+                    if (Rect.Left <= enemy.Rect.Right &&
+                        Rect.Right >= enemy.Rect.Left)
+                    {
+                        if (currentSpeedY > 0 && Rect.Bottom <= enemy.Rect.Top)
+                        {
+                            if (Rect.Bottom + currentSpeedY >= enemy.Rect.Top)
+                            {
+                                Rect.Y = enemy.Rect.Y - Rect.Height - 1;
+                                currentSpeedY = 0;
+                                break;
+                            }
+                        }
+                        else if (currentSpeedY < 0 && Rect.Top >= enemy.Rect.Bottom)
+                        {
+                            if (Rect.Top + currentSpeedY <= enemy.Rect.Bottom)
+                            {
+                                Rect.Y = enemy.Rect.Bottom + 1;
+                                currentSpeedY = 0;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

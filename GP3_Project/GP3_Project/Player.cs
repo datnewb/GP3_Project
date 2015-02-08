@@ -42,6 +42,7 @@ namespace GP3_Project
         private float currentInvulnerableTime;
 
         private float knockbackSpeed;
+        public Direction knockbackDirection;
 
         public Player(Rectangle startPosition, GraphicsDeviceManager graphics)
         {
@@ -67,10 +68,28 @@ namespace GP3_Project
             currentHealth = health;
 
             damaged = false;
-            invulnerableTime = 1;
+            invulnerableTime = 0.25f;
             currentInvulnerableTime = 0;
 
             knockbackSpeed = 5;
+            knockbackDirection = Direction.Left;
+        }
+
+        public void Reset()
+        {
+            currentHealth = health;
+
+            currentSpeedX = 0;
+            currentSpeedY = 0;
+
+            lastDirection = Direction.Down;
+            AllowMove = true;
+
+            IsAttacking = false;
+            currentAttackTime = 0;
+
+            damaged = false;
+            currentInvulnerableTime = 0;
         }
 
         public void InputListener(KeyboardState currentKeyState, KeyboardState previousKeyState, GameTime gameTime)
@@ -116,9 +135,12 @@ namespace GP3_Project
             //For single-press controls
             if (currentKeyState != previousKeyState)
             {
-                if (currentKeyState.IsKeyDown(Keys.Z))
+                if (!damaged)
                 {
-                    IsAttacking = true;
+                    if (currentKeyState.IsKeyDown(Keys.Z))
+                    {
+                        IsAttacking = true;
+                    }
                 }
             }
         }
@@ -137,7 +159,13 @@ namespace GP3_Project
             }
             else
             {
-
+                currentInvulnerableTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+                if (currentInvulnerableTime >= invulnerableTime)
+                {
+                    damaged = false;
+                    lastEnemyAttacker = null;
+                }
+                Knockback(gameTime);
             }
         }
 
@@ -149,13 +177,30 @@ namespace GP3_Project
                 IsAttacking = false;
                 currentInvulnerableTime = 0;
                 currentHealth--;
-            }
-            else
-            {
-                currentInvulnerableTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
-                if (currentInvulnerableTime >= invulnerableTime)
+                damaged = true;
+
+                if (currentSpeedX == 0 && currentSpeedY == 0)
                 {
-                    damaged = false;
+                    knockbackDirection = enemy.movementDirection;
+                }
+
+                else
+                {
+                    switch (lastDirection)
+                    {
+                        case Direction.Left:
+                            knockbackDirection = Direction.Right;
+                            break;
+                        case Direction.Right:
+                            knockbackDirection = Direction.Left;
+                            break;
+                        case Direction.Up:
+                            knockbackDirection = Direction.Down;
+                            break;
+                        case Direction.Down:
+                            knockbackDirection = Direction.Up;
+                            break;
+                    }
                 }
             }
         }
@@ -166,6 +211,31 @@ namespace GP3_Project
             {
                 int knockbackSpeedX = 0;
                 int knockbackSpeedY = 0;
+
+                switch (knockbackDirection)
+                {
+                    case Direction.Left:
+                        knockbackSpeedX = -((int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
+                        lastDirection = Direction.Right;
+                        break;
+                    case Direction.Right:
+                        knockbackSpeedX = (int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
+                        lastDirection = Direction.Left;
+                        break;
+                    case Direction.Up:
+                        knockbackSpeedY  = -((int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f)));
+                        lastDirection = Direction.Down;
+                        break;
+                    case Direction.Down:
+                        knockbackSpeedY = (int)(float)(knockbackSpeed * ((float)gameTime.ElapsedGameTime.Milliseconds / 10f));
+                        lastDirection = Direction.Up;
+                        break;
+                }
+
+                Physics.WallDetection(ref Rect, ref knockbackSpeedX, ref knockbackSpeedY);
+
+                Rect.X += knockbackSpeedX;
+                Rect.Y += knockbackSpeedY;
             }
         }
 
