@@ -114,6 +114,8 @@ namespace GP3_Project
                 }
 
                 Physics.WallDetection(ref Rect, ref KnockbackSpeedX, ref KnockbackSpeedY);
+                Physics.EnemyBlocking(ref Rect, ref KnockbackSpeedX, ref KnockbackSpeedY);
+                Physics.EnemyExitBlocking(ref Rect, ref KnockbackSpeedX, ref KnockbackSpeedY);
 
                 Rect.X += KnockbackSpeedX;
                 Rect.Y += KnockbackSpeedY;
@@ -154,6 +156,7 @@ namespace GP3_Project
 
                 Physics.WallDetection(ref Rect, ref currentSpeedX, ref currentSpeedY);
                 Physics.EnemyBlocking(ref Rect, ref currentSpeedX, ref currentSpeedY);
+                Physics.EnemyExitBlocking(ref Rect, ref currentSpeedX, ref currentSpeedY);
 
                 Rect.X += currentSpeedX;
                 Rect.Y += currentSpeedY;

@@ -41,15 +41,16 @@ namespace GP3_Project
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_Start.txt"), @"Textures\dun01_WholeImage"));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02_From01.txt"), @"Textures\dun02_WholeImage"));
-            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01_From02.txt"), @"Textures\dun01_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun01.txt"), @"Levels\dun01_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun02.txt"), @"Levels\dun02_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun03.txt"), @"Levels\dun03_WholeImage"));
+            Level.Levels.Add(new Level(File.ReadAllLines(Content.RootDirectory + @"\Levels\Dun04.txt"), @"Levels\dun04_WholeImage"));
 
-            Level.Levels[0].NextLevels.Add(Level.Levels[1]);
-
-            Level.Levels[1].NextLevels.Add(Level.Levels[2]);
-
-            Level.Levels[2].NextLevels.Add(Level.Levels[1]);
+            for (int currentLevel = 0; currentLevel < Level.Levels.Count; currentLevel++)
+            {
+                if (currentLevel + 1 < Level.Levels.Count)
+                    Level.Levels[currentLevel].NextLevel = Level.Levels[currentLevel + 1];
+            }
 
             player = new Player(new Rectangle(0, 0, Tile.TileSize, Tile.TileSize), graphics);
             LevelLoader.LoadLevel(graphics, Content, Level.Levels[0], player);
@@ -87,12 +88,10 @@ namespace GP3_Project
             //Next level checking
             foreach (Tile tile in Tile.LevelTiles)
             {
-                if (tile.GetType() == typeof(NextLevelTile))
+                if (tile is NextLevelTile)
                 {
-                    bool shouldBreak = false;
-                    ((NextLevelTile)tile).CheckExit(player, ref shouldBreak);
-                    if (shouldBreak)
-                        break;
+                    ((NextLevelTile)(tile)).CheckExit(player);
+                    break;
                 }
             }
 

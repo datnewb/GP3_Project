@@ -30,12 +30,6 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Levels\TestLevel.txt">
-      <Name>TestLevel</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Textures\Character_SpriteSheet.png">
       <Name>Character_SpriteSheet</Name>
       <Importer>TextureImporter</Importer>
@@ -44,55 +38,44 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Levels\Dun02_From01.txt">
-      <Name>Dun02_From01</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Levels\Dun03.txt">
       <Name>Dun03</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Levels\Dun04.txt">
       <Name>Dun04</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Levels\Dun05.txt">
-      <Name>Dun05</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\dun01_WholeImage.png">
+    <None Include="Levels\Dun01.txt">
+      <Name>Dun01</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Levels\dun01_WholeImage.png">
       <Name>dun01_WholeImage</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Levels\Dun01_Start.txt">
-      <Name>Dun01_Start</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Levels\Dun02.txt">
+      <Name>Dun02</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Levels\TestNextLevel.txt">
-      <Name>TestNextLevel</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\dun02_WholeImage.png">
+    <Compile Include="Levels\dun02_WholeImage.png">
       <Name>dun02_WholeImage</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Levels\Dun01_From02.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>Dun01_From02</Name>
-    </None>
+    <Compile Include="Levels\dun03_WholeImage.png">
+      <Name>dun03_WholeImage</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Levels\dun04_WholeImage.png">
+      <Name>dun04_WholeImage</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

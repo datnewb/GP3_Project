@@ -9,7 +9,7 @@ namespace GP3_Project
 {
     static class LevelLoader
     {
-        public static Level LoadedLevel = new Level();
+        public static Level LoadedLevel = null;
         public static Texture2D LoadedLevelTexture = null;
         public static bool ScrollingLevelX = false;
         public static bool ScrollingLevelY = false;
@@ -105,20 +105,12 @@ namespace GP3_Project
                                 new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize * 3 / 2),
                                 TileType.Wall));
                             break;
-                        default:
-                            if (char.IsDigit(tile))
-                            {
-                                int nextLevelIndex = int.Parse(char.ToString(tile));
-                                if (nextLevelIndex < level.NextLevels.Count)
-                                {
-                                    Tile.LevelTiles.Add(new NextLevelTile(
-                                        graphics, 
-                                        Content, 
-                                        level.NextLevels[nextLevelIndex], 
-                                        new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize), 
-                                        TileType.Exit));
-                                }
-                            }
+                        case 'F':
+                            Tile.LevelTiles.Add(new NextLevelTile(
+                                graphics,
+                                Content,
+                                level.NextLevel,
+                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize), TileType.Exit));
                             break;
 
                     }

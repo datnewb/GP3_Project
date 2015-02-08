@@ -10,7 +10,6 @@ namespace GP3_Project
     class NextLevelTile : Tile
     {
         public Level nextLevel;
-        public bool offNextLevelTile;
         public GraphicsDeviceManager graphics;
         public ContentManager Content;
 
@@ -20,17 +19,14 @@ namespace GP3_Project
             this.graphics = graphics;
             this.Content = Content;
 
-            offNextLevelTile = false;
-
             this.nextLevel = nextLevel;
         }
 
-        public void CheckExit(Player player, ref bool shouldBreak)
+        public void CheckExit(Player player)
         {
             if (player.Rect.Intersects(Rect))
             {
-                LevelLoader.LoadLevel(graphics, Content, nextLevel, player);
-                shouldBreak = true;
+                LevelLoader.LoadLevel(graphics, Content, LevelLoader.LoadedLevel.NextLevel, player);
             }
         }
     }
