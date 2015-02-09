@@ -11,12 +11,13 @@ namespace GP3_Project
         public static List<Enemy> EnemiesToBeRemoved = new List<Enemy>();
 
         public Rectangle Rect;
-        public Texture2D enemyTexture;
         public int Health = 3;
         public int currentHealth;
         public bool damaged;
 
         public int movementSpeed;
+        private int currentSpeedX;
+        private int currentSpeedY;
         public Direction movementDirection;
         public int knockbackSpeed;
 
@@ -28,19 +29,25 @@ namespace GP3_Project
 
         internal Random randomizer;
 
-        public Enemy(GraphicsDevice graphicsDevice, Rectangle Rect)
+        public static Texture2D EnemySpriteSheet;
+        public static int textureWidthInterval;
+        public static int textureHeightInterval;
+        public Rectangle textureSourceRectangle;
+
+        private int currentFrameX;
+        internal int frameDelay;
+        private int currentFrameDelay;
+
+        public Enemy(Rectangle Rect)
         {
             this.Rect = Rect;
-
-            Color[] textureColor = new Color[1];
-            textureColor[0] = Color.Red;
-            enemyTexture = new Texture2D(graphicsDevice, 1, 1);
-            enemyTexture.SetData(textureColor);
 
             currentHealth = Health;
             damaged = false;
 
             movementSpeed = 2;
+            currentSpeedX = 0;
+            currentSpeedY = 0;
             randomizer = new Random(this.GetHashCode());
             movementDirection = (Direction)(randomizer.Next(0, 4));
             knockbackSpeed = 5;
@@ -50,6 +57,10 @@ namespace GP3_Project
 
             idleTime = 1.5f;
             currentIdleTime = randomizer.Next(0, (int)(Math.Ceiling(idleTime))) + (float)(randomizer.NextDouble());
+
+            frameDelay = 3;
+            currentFrameDelay = 0;
+            currentFrameX = 0;
         }
 
         public void EnemyActions(Player player, GameTime gameTime)
@@ -63,9 +74,39 @@ namespace GP3_Project
             {
                 EnemyKnockback(player, gameTime);
             }
+
+            Animate();
         }
 
-        public void Damage()
+        internal void Animate()
+        {
+            if (damaged)
+            {
+                currentFrameX = 0;
+            }
+            else
+            {
+                if (currentSpeedX != 0 || currentSpeedY != 0)
+                {
+                    currentFrameDelay++;
+                    if (currentFrameDelay >= frameDelay)
+                    {
+                        currentFrameDelay = 0;
+                        currentFrameX++;
+                        if (currentFrameX > 2)
+                            currentFrameX = 0;
+                    }
+                }
+                else
+                {
+                    currentFrameX = 1;
+                }
+            }
+
+            textureSourceRectangle = new Rectangle(textureWidthInterval * currentFrameX, textureHeightInterval * (int)movementDirection, textureWidthInterval, textureHeightInterval);
+        }
+
+        public void Damage(Player player)
         {
             currentHealth--;
             if (currentHealth <= 0)
@@ -76,6 +117,22 @@ namespace GP3_Project
 
             damaged = true;
             currentIdleTime = 0;
+
+            switch (player.lastDirection)
+            {
+                case Direction.Left:
+                    movementDirection = Direction.Right;
+                    break;
+                case Direction.Right:
+                    movementDirection = Direction.Left;
+                    break;
+                case Direction.Up:
+                    movementDirection = Direction.Down;
+                    break;
+                case Direction.Down:
+                    movementDirection = Direction.Up;
+                    break;
+            }
         }
 
         public static void RemoveDeadEnemies()
@@ -126,8 +183,8 @@ namespace GP3_Project
         {
             if (currentIdleTime == idleTime)
             {
-                int currentSpeedX = 0;
-                int currentSpeedY = 0;
+                currentSpeedX = 0;
+                currentSpeedY = 0;
 
                 currentMovementTime -= gameTime.ElapsedGameTime.Milliseconds / 1000f;
                 if (currentMovementTime <= 0)
@@ -163,6 +220,9 @@ namespace GP3_Project
             }
             else
             {
+                currentSpeedX = 0;
+                currentSpeedY = 0;
+
                 currentIdleTime += gameTime.ElapsedGameTime.Milliseconds / 1000f;
                 if (currentIdleTime >= idleTime)
                 {

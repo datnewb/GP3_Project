@@ -15,8 +15,10 @@ namespace GP3_Project
         private float attackCooldownTime;
         private float currentAttackCooldownTime;
 
-        public EnemyWizard (GraphicsDevice graphicsDevice, Rectangle Rect) 
-            : base (graphicsDevice, Rect)
+        public static Texture2D EnemyWizardSpriteSheet;
+
+        public EnemyWizard (Rectangle Rect) 
+            : base (Rect)
         {
             movementSpeed = 1;
             movementTime = 3;
@@ -30,6 +32,8 @@ namespace GP3_Project
 
             attackCooldownTime = 1.5f;
             currentAttackCooldownTime = 0;
+
+            frameDelay = 5;
         }
 
         public void EnemyActions(GraphicsDevice graphicsDevice, Player player, GameTime gameTime)
@@ -51,6 +55,8 @@ namespace GP3_Project
             {
                 EnemyKnockback(player, gameTime);
             }
+
+            Animate();
         }
 
         private void EnemyAttackRanged(GraphicsDevice graphicsDevice, Player player)
@@ -102,7 +108,6 @@ namespace GP3_Project
                             if (movementDirection == Direction.Left)
                             {
                                 Projectile.Projectiles.Add(new Projectile(
-                                    graphicsDevice,
                                     new Rectangle(Rect.Left - Tile.TileSize / 2, Rect.Center.Y - Tile.TileSize / 4, Tile.TileSize / 2, Tile.TileSize / 2),
                                     movementDirection,
                                     this));
@@ -110,7 +115,6 @@ namespace GP3_Project
                             else if (movementDirection == Direction.Right)
                             {
                                 Projectile.Projectiles.Add(new Projectile(
-                                    graphicsDevice,
                                     new Rectangle(Rect.Right, Rect.Center.Y - Tile.TileSize / 4, Tile.TileSize / 2, Tile.TileSize / 2),
                                     movementDirection,
                                     this));
@@ -140,7 +144,6 @@ namespace GP3_Project
                             if (movementDirection == Direction.Up)
                             {
                                 Projectile.Projectiles.Add(new Projectile(
-                                    graphicsDevice,
                                     new Rectangle(Rect.Center.X - Tile.TileSize / 4, Rect.Top - Tile.TileSize / 2, Tile.TileSize / 2, Tile.TileSize / 2),
                                     movementDirection,
                                     this));
@@ -148,7 +151,6 @@ namespace GP3_Project
                             if (movementDirection == Direction.Down)
                             {
                                 Projectile.Projectiles.Add(new Projectile(
-                                    graphicsDevice,
                                     new Rectangle(Rect.Center.X - Tile.TileSize / 4, Rect.Bottom, Tile.TileSize / 2, Tile.TileSize / 2),
                                     movementDirection,
                                     this));
@@ -168,27 +170,6 @@ namespace GP3_Project
             {
                 isAttacking = false;
                 currentAttackCooldownTime = 0;
-            }
-        }
-
-        internal void Damage(Player player)
-        {
-            Damage();
-
-            switch (player.lastDirection)
-            {
-                case Direction.Left:
-                    movementDirection = Direction.Right;
-                    break;
-                case Direction.Right:
-                    movementDirection = Direction.Left;
-                    break;
-                case Direction.Up:
-                    movementDirection = Direction.Down;
-                    break;
-                case Direction.Down:
-                    movementDirection = Direction.Up;
-                    break;
             }
         }
     }

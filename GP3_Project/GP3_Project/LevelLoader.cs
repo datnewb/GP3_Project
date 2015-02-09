@@ -88,7 +88,7 @@ namespace GP3_Project
                             player.Rect = new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize);
                             break;
                         case 'E':
-                            Enemy.Enemies.Add(new Enemy(graphics.GraphicsDevice, new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize)));
+                            Enemy.Enemies.Add(new Enemy(new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize)));
                             break;
                         case 'X': //Single Wall Tile
                             Tile.LevelTiles.Add(new Tile(
@@ -109,7 +109,6 @@ namespace GP3_Project
                             break;
                         case 'W':
                             Enemy.Enemies.Add(new EnemyWizard(
-                                graphics.GraphicsDevice,
                                 new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize)));
                             break;
 
@@ -118,6 +117,12 @@ namespace GP3_Project
                 }
                 tileYCoord += Tile.TileSize;
             }
+
+            Enemy.textureWidthInterval = Enemy.EnemySpriteSheet.Width / 3;
+            Enemy.textureHeightInterval = Enemy.EnemySpriteSheet.Height / 4;
+
+            EnemyWizard.textureWidthInterval = EnemyWizard.EnemyWizardSpriteSheet.Width / 3;
+            EnemyWizard.textureHeightInterval = EnemyWizard.EnemyWizardSpriteSheet.Height / 4;
 
             LoadedLevel = level;
             LoadedLevelTexture = Content.Load<Texture2D>(level.levelTextureDirectory);

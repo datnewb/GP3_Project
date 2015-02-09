@@ -13,24 +13,31 @@ namespace GP3_Project
 
         public Rectangle Rect;
         public Direction direction;
-        public Texture2D texture;
         public Enemy caster;
 
         private int Speed;
 
-        public Projectile (GraphicsDevice graphicsDevice, Rectangle StartRect, Direction direction, Enemy caster)
+        public static Texture2D ProjectileSpriteSheet;
+        public Rectangle textureSourceRectangle;
+        public static int textureWidthInterval;
+        public static int textureHeightInterval;
+
+        private int currentFrameX;
+        private int frameDelay;
+        private int currentFrameDelay;
+
+        public Projectile (Rectangle StartRect, Direction direction, Enemy caster)
         {
             Rect = StartRect;
             this.direction = direction;
 
-            Color[] textureColor = new Color[1];
-            textureColor[0] = Color.Red;
-            texture = new Texture2D(graphicsDevice, 1, 1);
-            texture.SetData(textureColor);
-
             this.caster = caster;
 
             Speed = 5;
+
+            frameDelay = 10;
+            currentFrameDelay = 0;
+            currentFrameX = 0;
         }
 
         public static void UpdateProjectiles(Player player, GameTime gameTime)
@@ -74,12 +81,28 @@ namespace GP3_Project
                     player.knockbackDirection = projectile.direction;
                     ProjectilesToBeRemoved.Add(projectile);
                 }
+
+                projectile.Animate();
             }
 
             foreach (Projectile projectile in ProjectilesToBeRemoved)
             {
                 Projectiles.Remove(projectile);
             }
+        }
+
+        private void Animate()
+        {
+            currentFrameDelay++;
+            if (currentFrameDelay > frameDelay)
+            {
+                currentFrameDelay = 0;
+                currentFrameX++;
+                if (currentFrameX > 2)
+                    currentFrameX = 0;
+            }
+
+            textureSourceRectangle = new Rectangle(textureWidthInterval * currentFrameX, textureHeightInterval * (int)direction, textureWidthInterval, textureHeightInterval);
         }
     }
 }

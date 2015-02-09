@@ -23,6 +23,8 @@ namespace GP3_Project
 
         KeyboardState previousKeyState;
 
+        Texture2D testTexture;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -52,8 +54,31 @@ namespace GP3_Project
                     Level.Levels[currentLevel].NextLevel = Level.Levels[currentLevel + 1];
             }
 
-            player = new Player(new Rectangle(0, 0, Tile.TileSize, Tile.TileSize), graphics);
+            player = new Player(new Rectangle(0, 0, Tile.TileSize, Tile.TileSize));
+
+            //Load textures
+            Player.PlayerSpriteSheet = Content.Load<Texture2D>(@"Textures\Character_SpriteSheet");
+            player.textureWidthInterval = Player.PlayerSpriteSheet.Width / 3;
+            player.textureHeightInterval = Player.PlayerSpriteSheet.Height / 4;
+
+            Player.PlayerSwordTexture = Content.Load<Texture2D>(@"Textures\Sword");
+
+            Enemy.EnemySpriteSheet = Content.Load<Texture2D>(@"Textures\Enemy_Sprite");
+            EnemyWizard.EnemyWizardSpriteSheet = Content.Load<Texture2D>(@"Textures\Boss_Sprite");
+            Enemy.textureWidthInterval = Enemy.EnemySpriteSheet.Width / 3;
+            Enemy.textureHeightInterval = Enemy.EnemySpriteSheet.Height / 4;
+
+            Projectile.ProjectileSpriteSheet = Content.Load<Texture2D>(@"Textures\FireBall");
+            Projectile.textureWidthInterval = Projectile.ProjectileSpriteSheet.Width / 3;
+            Projectile.textureHeightInterval = Projectile.ProjectileSpriteSheet.Height / 4;
+
+            //Load first level
             LevelLoader.LoadLevel(graphics, Content, Level.Levels[0], player);
+
+            testTexture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            Color[] testColor = new Color[1];
+            testColor[0] = Color.Green;
+            testTexture.SetData(testColor);
         }
 
         protected override void UnloadContent()
@@ -117,17 +142,54 @@ namespace GP3_Project
 
             foreach (Enemy enemy in Enemy.Enemies)
             {
-                spriteBatch.Draw(enemy.enemyTexture, enemy.Rect, Color.White);
+                if (enemy is EnemyWizard)
+                    spriteBatch.Draw(EnemyWizard.EnemyWizardSpriteSheet, enemy.Rect, enemy.textureSourceRectangle, Color.White);
+                else
+                    spriteBatch.Draw(Enemy.EnemySpriteSheet, enemy.Rect, enemy.textureSourceRectangle, Color.White);
             }
 
             foreach (Projectile projectile in Projectile.Projectiles)
             {
-                spriteBatch.Draw(projectile.texture, projectile.Rect, Color.White);
+                spriteBatch.Draw(Projectile.ProjectileSpriteSheet, projectile.Rect, projectile.textureSourceRectangle, Color.White);
             }
 
-            spriteBatch.Draw(player.playerTexture, player.Rect, Color.White);
             if (player.IsAttacking)
-                spriteBatch.Draw(player.playerTexture, player.AttackRect, Color.Gray);
+            {
+                switch (player.lastDirection)
+                {
+                    case Direction.Left:
+                        spriteBatch.Draw(
+                            Player.PlayerSwordTexture,
+                            new Rectangle(player.Rect.Left - Tile.TileSize / 8, player.Rect.Center.Y - Tile.TileSize, player.AttackRect.Height, player.AttackRect.Width), 
+                            null, 
+                            Color.White, 
+                            (float)(Math.PI * 3 / 2), 
+                            new Vector2(Tile.TileSize / 4 * 3, Tile.TileSize * 3 / 2), 
+                            SpriteEffects.None, 
+                            0);
+                        break;
+                    case Direction.Right:
+                        spriteBatch.Draw(
+                            Player.PlayerSwordTexture,
+                            new Rectangle(player.Rect.Right - Tile.TileSize / 4, player.Rect.Center.Y - Tile.TileSize, player.AttackRect.Height, player.AttackRect.Width),
+                            null,
+                            Color.White,
+                            (float)(Math.PI / 2),
+                            new Vector2(-Tile.TileSize * 9 / 21, Tile.TileSize * 15 / 7),
+                            SpriteEffects.None,
+                            0);
+                        break;
+                    case Direction.Up:
+                        spriteBatch.Draw(Player.PlayerSwordTexture, player.AttackRect, Color.White);
+                        break;
+                    case Direction.Down:
+                        spriteBatch.Draw(Player.PlayerSwordTexture, player.AttackRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipVertically, 0);
+                        break;
+                }
+                
+            }
+
+            spriteBatch.Draw(Player.PlayerSpriteSheet, player.Rect, player.textureSourceRectangle, Color.White);
 
             spriteBatch.End();
 

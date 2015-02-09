@@ -3,6 +3,10 @@ Content\Levels\dun01_WholeImage.xnb
 Content\Levels\dun02_WholeImage.xnb
 Content\Levels\dun03_WholeImage.xnb
 Content\Levels\dun04_WholeImage.xnb
+Content\Textures\Boss_Sprite.xnb
+Content\Textures\Enemy_Sprite.xnb
+Content\Textures\FireBall.xnb
+Content\Textures\Sword.xnb
 Content\Textures\Character_SpriteSheet.png
 Content\Levels\Dun03.txt
 Content\Levels\Dun04.txt

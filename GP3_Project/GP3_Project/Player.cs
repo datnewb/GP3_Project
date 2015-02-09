@@ -10,10 +10,10 @@ namespace GP3_Project
 {
     enum Direction
     {
-        Up,
         Down,
         Left,
-        Right
+        Right,
+        Up
     }
 
     class Player
@@ -24,7 +24,6 @@ namespace GP3_Project
         public static int Speed = 3;
         private int currentSpeedX;
         private int currentSpeedY;
-        public Texture2D playerTexture;
 
         public bool AllowMove;
         public bool IsAttacking;
@@ -44,16 +43,21 @@ namespace GP3_Project
         private float knockbackSpeed;
         public Direction knockbackDirection;
 
-        public Player(Rectangle startPosition, GraphicsDeviceManager graphics)
+        public static Texture2D PlayerSpriteSheet;
+        public static Texture2D PlayerSwordTexture;
+        public Rectangle textureSourceRectangle;
+        public int textureWidthInterval;
+        public int textureHeightInterval;
+        private int currentFrameX = 0;
+
+        private int frameDelay;
+        private int currentFrameDelay;
+
+        public Player(Rectangle startPosition)
         {
             Rect = startPosition;
             currentSpeedX = 0;
             currentSpeedY = 0;
-
-            playerTexture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-            Color[] textureColor = new Color[1];
-            textureColor[0] = Color.DarkGreen;
-            playerTexture.SetData(textureColor);
 
             lastDirection = Direction.Down;
             AttackRect = new Rectangle(Rect.Center.X - Tile.TileSize / 8, Rect.Bottom, Tile.TileSize / 4, Tile.TileSize);
@@ -73,6 +77,9 @@ namespace GP3_Project
 
             knockbackSpeed = 5;
             knockbackDirection = Direction.Left;
+
+            frameDelay = 5;
+            currentFrameDelay = 0;
         }
 
         public void Reset()
@@ -167,6 +174,36 @@ namespace GP3_Project
                 }
                 Knockback(gameTime);
             }
+
+            Animate();
+        }
+
+        private void Animate()
+        {
+            if (IsAttacking)
+            {
+                currentFrameX = 0;
+            }
+            else
+            {
+                if (currentSpeedX != 0 || currentSpeedY != 0)
+                {
+                    currentFrameDelay++;
+                    if (currentFrameDelay >= frameDelay)
+                    {
+                        currentFrameDelay = 0;
+                        currentFrameX++;
+                        if (currentFrameX > 2)
+                            currentFrameX = 0;
+                    }
+                }
+                else
+                {
+                    currentFrameX = 1;
+                }
+            }
+
+            textureSourceRectangle = new Rectangle(textureWidthInterval * currentFrameX, textureHeightInterval * (int)lastDirection, textureWidthInterval, textureHeightInterval);
         }
 
         public void Damage(Enemy enemy, GameTime gameTime)
@@ -278,10 +315,7 @@ namespace GP3_Project
                         if (AttackRect.Intersects(enemy.Rect))
                         {
                             enemy.damaged = true;
-                            if (enemy is EnemyWizard)
-                                ((EnemyWizard)enemy).Damage(this);
-                            else
-                                enemy.Damage();
+                            enemy.Damage(this);
                         }
                     }
                 }

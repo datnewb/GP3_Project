@@ -23,3 +23,7 @@ C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\G
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun02.txt
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun03.txt
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\Dun04.txt
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Boss_Sprite.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Enemy_Sprite.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\FireBall.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Sword.xnb

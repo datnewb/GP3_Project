@@ -46,6 +46,42 @@
       <Output>C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Levels\dun04_WholeImage.xnb</Output>
       <Time>2015-02-08T23:34:05.9968518+08:00</Time>
     </Item>
+    <Item>
+      <Source>Textures\Boss_Sprite.png</Source>
+      <Name>Textures\Boss_Sprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Boss_Sprite.xnb</Output>
+      <Time>2015-02-09T00:52:06.6713359+08:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Enemy_Sprite.png</Source>
+      <Name>Textures\Enemy_Sprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Enemy_Sprite.xnb</Output>
+      <Time>2015-02-09T00:52:06.6623304+08:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\FireBall.png</Source>
+      <Name>Textures\FireBall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\FireBall.xnb</Output>
+      <Time>2015-02-09T17:54:06.0687389+08:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sword.png</Source>
+      <Name>Textures\Sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Sword.xnb</Output>
+      <Time>2015-02-09T17:54:06.0786363+08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{100BA5AD-DC01-4E5E-949D-F0A6292F8C3B}</ContentProjectGUID>
