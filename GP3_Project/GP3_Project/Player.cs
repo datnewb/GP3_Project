@@ -45,6 +45,7 @@ namespace GP3_Project
 
         public static Texture2D PlayerSpriteSheet;
         public static Texture2D PlayerSwordTexture;
+        public static Texture2D HeartTexture;
         public Rectangle textureSourceRectangle;
         public int textureWidthInterval;
         public int textureHeightInterval;

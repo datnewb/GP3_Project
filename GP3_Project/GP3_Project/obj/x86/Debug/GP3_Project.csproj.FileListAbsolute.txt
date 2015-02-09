@@ -27,3 +27,13 @@ C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\G
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Enemy_Sprite.xnb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\FireBall.xnb
 C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\Textures\Sword.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\GameUI\Life.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\exit_active.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\exit_normal.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\start_active.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\start_normal.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\Title_GUI.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\resume_active.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\resume_normal.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\backTotitle_active.xnb
+C:\Users\Maynard\Documents\Visual Studio 2013\Projects\GP3_Project\GP3_Project\GP3_Project\bin\x86\Debug\Content\MainMenu\backTotitle_normal.xnb

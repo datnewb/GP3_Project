@@ -20,14 +20,9 @@ namespace GP3_Project
 
         public static void LoadLevel(GraphicsDeviceManager graphics, ContentManager Content, Level level, Player player)
         {
-            if (LoadedLevelTexture != null)
-            {
-                if (level != LoadedLevel)
-                    LoadedLevelTexture.Dispose();
-            }
-
             Tile.LevelTiles = new List<Tile>();
             Enemy.Enemies = new List<Enemy>();
+            Projectile.Projectiles = new List<Projectile>();
 
             //Check size of level
             int levelWidth = 0;

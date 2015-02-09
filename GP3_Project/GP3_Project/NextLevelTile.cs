@@ -22,11 +22,14 @@ namespace GP3_Project
             this.nextLevel = nextLevel;
         }
 
-        public void CheckExit(Player player)
+        public void CheckExit(Player player, ref GameState currentGameState)
         {
             if (player.Rect.Intersects(Rect))
             {
-                LevelLoader.LoadLevel(graphics, Content, LevelLoader.LoadedLevel.NextLevel, player);
+                if (nextLevel != null)
+                    LevelLoader.LoadLevel(graphics, Content, LevelLoader.LoadedLevel.NextLevel, player);
+                else
+                    currentGameState = GameState.MainMenu;
             }
         }
     }

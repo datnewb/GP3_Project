@@ -7,6 +7,16 @@ Content\Textures\Boss_Sprite.xnb
 Content\Textures\Enemy_Sprite.xnb
 Content\Textures\FireBall.xnb
 Content\Textures\Sword.xnb
+Content\GameUI\Life.xnb
+Content\MainMenu\exit_active.xnb
+Content\MainMenu\exit_normal.xnb
+Content\MainMenu\start_active.xnb
+Content\MainMenu\start_normal.xnb
+Content\MainMenu\Title_GUI.xnb
+Content\MainMenu\resume_active.xnb
+Content\MainMenu\resume_normal.xnb
+Content\MainMenu\backTotitle_active.xnb
+Content\MainMenu\backTotitle_normal.xnb
 Content\Textures\Character_SpriteSheet.png
 Content\Levels\Dun03.txt
 Content\Levels\Dun04.txt
