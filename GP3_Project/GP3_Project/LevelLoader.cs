@@ -86,14 +86,9 @@ namespace GP3_Project
                     {
                         case 'S': //Start Tile
                             player.Rect = new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize);
-                            goto case 'O';
+                            break;
                         case 'E':
                             Enemy.Enemies.Add(new Enemy(graphics.GraphicsDevice, new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize)));
-                            goto case 'O';
-                        case 'O': //Empty Tile
-                            Tile.LevelTiles.Add(new Tile(
-                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize),
-                                TileType.Empty));
                             break;
                         case 'X': //Single Wall Tile
                             Tile.LevelTiles.Add(new Tile(
@@ -111,6 +106,11 @@ namespace GP3_Project
                                 Content,
                                 level.NextLevel,
                                 new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize), TileType.Exit));
+                            break;
+                        case 'W':
+                            Enemy.Enemies.Add(new EnemyWizard(
+                                graphics.GraphicsDevice,
+                                new Rectangle(tileXCoord, tileYCoord, Tile.TileSize, Tile.TileSize)));
                             break;
 
                     }

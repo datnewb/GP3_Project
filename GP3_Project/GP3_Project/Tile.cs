@@ -7,7 +7,6 @@ namespace GP3_Project
 {
     public enum TileType
     {
-        Empty,
         Wall,
         Exit
     }

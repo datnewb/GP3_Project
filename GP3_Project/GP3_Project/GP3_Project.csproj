@@ -74,11 +74,13 @@
   <ItemGroup>
     <Compile Include="Camera2D.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyWizard.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="NextLevelTile.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

@@ -20,13 +20,13 @@ namespace GP3_Project
         public Direction movementDirection;
         public int knockbackSpeed;
 
-        private float movementTime;
-        private float currentMovementTime;
+        internal float movementTime;
+        internal float currentMovementTime;
 
-        private float idleTime;
-        private float currentIdleTime;
+        internal float idleTime;
+        internal float currentIdleTime;
 
-        private Random randomizer;
+        internal Random randomizer;
 
         public Enemy(GraphicsDevice graphicsDevice, Rectangle Rect)
         {
@@ -90,7 +90,7 @@ namespace GP3_Project
             }
         }
 
-        private void EnemyKnockback(Player player, GameTime gameTime)
+        internal void EnemyKnockback(Player player, GameTime gameTime)
         {
             if (damaged)
             {
@@ -122,7 +122,7 @@ namespace GP3_Project
             }
         }
 
-        private void EnemyMovement(GameTime gameTime)
+        internal void EnemyMovement(GameTime gameTime)
         {
             if (currentIdleTime == idleTime)
             {
@@ -173,11 +173,12 @@ namespace GP3_Project
             }
         }
 
-        private void EnemyAttack(Player player, GameTime gameTime)
+        internal void EnemyAttack(Player player, GameTime gameTime)
         {
             if (player.Rect.Intersects(Rect))
             {
                 player.Damage(this, gameTime);
+                return;
             }
         }
     }

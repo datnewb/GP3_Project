@@ -278,7 +278,10 @@ namespace GP3_Project
                         if (AttackRect.Intersects(enemy.Rect))
                         {
                             enemy.damaged = true;
-                            enemy.Damage();
+                            if (enemy is EnemyWizard)
+                                ((EnemyWizard)enemy).Damage(this);
+                            else
+                                enemy.Damage();
                         }
                     }
                 }

@@ -80,10 +80,16 @@ namespace GP3_Project
             //Enemy updates
             foreach(Enemy enemy in Enemy.Enemies)
             {
-                enemy.EnemyActions(player, gameTime);
+                if (enemy is EnemyWizard)
+                    ((EnemyWizard)enemy).EnemyActions(graphics.GraphicsDevice, player, gameTime);
+                else
+                    enemy.EnemyActions(player, gameTime);
             }
 
             Enemy.RemoveDeadEnemies();
+
+            //Projectile updates
+            Projectile.UpdateProjectiles(player, gameTime);
 
             //Next level checking
             foreach (Tile tile in Tile.LevelTiles)
@@ -112,6 +118,11 @@ namespace GP3_Project
             foreach (Enemy enemy in Enemy.Enemies)
             {
                 spriteBatch.Draw(enemy.enemyTexture, enemy.Rect, Color.White);
+            }
+
+            foreach (Projectile projectile in Projectile.Projectiles)
+            {
+                spriteBatch.Draw(projectile.texture, projectile.Rect, Color.White);
             }
 
             spriteBatch.Draw(player.playerTexture, player.Rect, Color.White);
